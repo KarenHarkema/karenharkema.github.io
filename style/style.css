@@ -1,0 +1,560 @@
+/*
+Theme Name: newrafael2023
+Theme URI: 
+Description: Custom theme for newrafael.com
+Version: 2.0
+Author: Nebojsa Dolas, Reinier Feijen
+*/
+
+:root {
+    --sidebar-min-width: 207px; /* logo width + 2 * 36 margin */
+    --content-width: 700px;
+    --sidebar-max-width: 400px;
+    --font-family: system-ui;
+    --font-size-normal: 14px;
+    --font-size-header: 24px;
+    --font-size-button: 13px;
+    --first-image-padding-top: 0px; /* Used in newrafael.js */
+    --between-image-padding: 20px; /* Used in newrafael.js */
+}
+
+/* 
+Threshold: 907 = 700 + 207 --content-width + --sidebar-min-width 
+*/
+
+@media (min-width: 907px) { /* WIDE */
+    .hide-if-wide {
+        display: none !important;
+    }
+}
+@media not (min-width: 907px) { /* NARROW */
+    :root {
+        --font-size-normal: 24px;
+        --font-size-header: 32.5px;
+        --font-size-button: 26px;
+        --first-image-padding-top: 13px; /* Used in newrafael.js */
+        --between-image-padding: 0px; /* Used in newrafael.js */
+    }
+    .hide-if-narrow {
+        display: none !important;
+    }
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #999;
+    font-family: var(--font-family);
+    font-size: var(--font-size-normal);
+}
+
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/*************** SIDEBAR / TOPMENU ************************/
+
+#logo a img {
+    width: 135px;
+}
+
+#logo {
+    margin-bottom: 32px;
+}
+
+.version {
+    font-size: calc(.8 * var(--font-size-normal));
+    color: #808080;
+}
+
+@media (min-width: 907px) { /* WIDE */
+    #sidebar {
+        position: fixed;
+        left: max(36px, calc((100vw - var(--content-width)) / 2 - var(--sidebar-max-width)));
+        top: 34px;
+    }
+
+    #sidebar ul {
+        padding: 0 0 5px 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    #sidebar ul>li {
+        margin-bottom: 14px;
+    }
+}
+
+@media not (min-width: 907px) { /* NARROW */
+    #logo {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    #logo a img {
+        width: 128px;
+    }
+
+    #sidebar {
+        width: var(--content-width);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: inline-flex;
+    }
+    
+    .version {
+        font-size: calc(.6 * var(--font-size-normal));
+    }
+
+    #sidebar ul {
+        padding: 0;
+        margin: 64px 0 0 28px;
+        list-style: none;
+        width: 700px;
+    }
+
+    #sidebar ul>li {
+        float: left;
+        margin-right: 4px;
+    }
+    .menu-line {
+        clear: both;
+        border-bottom: 1px solid #999;
+    }
+}
+
+/******* PAGE & CONTENT ***************/
+
+#page {
+    width: var(--content-width);
+}
+#content {    
+    width: var(--content-width);
+}
+#content .post {
+    color: #000;
+}
+
+#content h2 {
+    font-size: var(--font-size-header);
+    padding: 0 0 17px 0;
+    margin-block-start: 0;
+}
+#content h2,
+#content h2 a {
+    color: #999;
+    text-decoration: none;
+}
+#content h2 a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+#content h2::before {
+    content: "🌹";
+    margin-left: -10px;
+    margin-right: 6px;
+    font-size: calc(var(--font-size-header) * .875);
+}
+
+body.mac-os #content h2::before {
+    margin-left: -2px;
+    font-size: calc(var(--font-size-header) * .75);
+}
+
+#content .entry {
+    padding: 0px;
+}
+
+.entry p {
+    margin-top: 0px; 
+}
+
+/* Fix spacing between post title and entry if it starts with an image/iframe (even when wrapped in <a> tags) */
+.entry>:first-of-type:is(p,div)>a:first-child>:is(img,iframe),
+.entry>:first-of-type:is(p,div)>:first-child:is(img,iframe) {
+    padding-top: var(--first-image-padding-top) !important; /* also see newrafael.js:fixImageSpacing */
+}
+
+div.ruler_container {
+    padding: 25px 0;
+}
+
+div.ruler {
+    border-bottom: 1px solid #999;
+    width: 300px;
+    margin: -6px 0 26px;
+}
+
+@media (min-width: 907px) { /* WIDE */
+    #content {
+        padding-bottom: 40px;
+        position: absolute;
+        top: 36px;
+        left: max(var(--sidebar-min-width), calc((100vw - var(--content-width)) / 2));
+    }
+}
+@media not (min-width: 907px) { /* NARROW */ 
+    #content {
+        padding: 30px 0 80px;
+    }
+    #content .post {
+        margin-top: -11px;
+    }   
+    #page {
+        /* see newrafael.js for overrides */
+        margin: 0 auto;
+    }
+    #content h2 {
+        padding-bottom: 18px;
+        padding-top: 7px;
+    }
+    div.ruler {    
+        margin: -28px 0 28px;
+    }
+}
+
+
+a {
+    color: #000;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #00F;
+    text-decoration: underline;
+}
+
+h2,
+h3 {
+    color: #000;
+    font-weight: normal;
+}
+
+.post {
+    line-height: 150%;
+}
+
+.post h2 {
+    margin-bottom: 2px;
+    padding-bottom: 0px;
+}
+
+.center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/****************** INTERNET PAGE ********************/
+
+.piece-list .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+    display: grid;
+    margin-bottom: 60px;
+}
+
+.piece-list .grid>div {
+    margin-top:-14px;
+}
+
+.piece-list .grid > div img {
+    width: 100%;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+    margin-bottom: 20px;
+}
+
+.piece-list .year {
+    color: #999; padding-bottom: 40px;
+}
+
+.piece-list a {
+    text-decoration: none;
+}
+.piece-list a:hover {
+    text-decoration: underline;
+}
+.piece-list .title {
+    text-align: center;
+}
+
+/****************** PRESENTATION PAGE ********************/
+
+body.presentation {
+    background-color: black;
+    color: white;
+}
+
+#page-presentation {
+    width: 100%;
+    /* padding: 50px 0px; */
+}
+#page-presentation, #page-presentation a {
+    color: white;
+}
+
+.piece-list.presentation .grid {
+    grid-template-columns: repeat(auto-fit, 200px);
+    justify-content: space-evenly;
+    gap: 50px;
+    padding: 50px;
+}
+
+@media not (min-width: 907px) { /* NARROW */
+    #page.presentation {
+            width: 100%;
+            background-color: black;
+        }
+    .piece-list.presentation .grid {
+        gap: 30px;
+        padding: 30px;
+    }
+}
+
+.piece-list.presentation > div img {
+    box-shadow: none;
+    width: 200px;
+}
+
+/****************** INFO PAGE ********************/
+
+#info-buttons {
+    padding-top: calc(var(--font-size-normal) * .65);
+}
+
+@media not (min-width: 907px) {  /* NARROW */
+    #info-buttons {
+        padding-top: 14px;
+        padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+    }
+    #info-buttons .navbutton {
+        margin-right: 0px;
+    }
+}
+
+/* NEWSLETTER */
+
+#mc_embed_signup {
+    width: 700px;
+    margin-top: calc(var(--font-size-normal) * 1.4);
+}
+
+.mc-field-group {
+    float: left;
+    margin-right: 13px;
+}
+
+#mce-responses {
+    float: left;
+    clear: both;
+    margin-top: 5px;
+}
+
+#mc_embed_signup div.mce_inline_error,
+#mce-success-response,
+#mce-error-response {
+    background-color: white !important;
+    color: #000 !important;
+    padding: 5px 0px !important;
+    font-weight: normal !important;
+    border: 0px !important;
+}
+
+#mc_embed_signup input[type="email"] {
+    width: 180px; 
+    font-size: var(--font-size-button);
+    padding: 5px 10px 6.5px;
+    height: 15px;
+    border: 1px solid #999999 !important;
+    border-radius: 3px !important;
+    font-family: inherit;
+}
+
+#mc_embed_signup input[type="submit"] {
+    appearance: none;
+    padding: 0px 8px 1px;
+}
+
+
+@media not (min-width: 907px) {  /* NARROW */
+    #mc_embed_signup div.mce_inline_error, 
+    #mce-success-response, 
+    #mce-error-response {
+        padding: 12px 0px !important; 
+    }
+    
+    #mc_embed_signup input[type="email"] {
+        width: 360px; 
+        font-size: 26px; 
+        height: 30px;
+        padding: 8px 15px 9px; 
+    }
+    
+    #mc_embed_signup input[type="submit"] {
+        padding: 1px 14px 1px; 
+        height: 50px;
+    }
+}
+
+
+/****************** EXHIBITIONS PAGE ********************/
+
+
+@media not (min-width: 907px) { /* NARROW */
+    /* Ruleset copied from lightbox.css because its not loaded on mobile */
+    .lightbox-container {
+        line-height: 100% !important;
+        margin-bottom: 14px;
+    }
+    .lightbox-container a {
+        pointer-events: none;
+    }
+    .lightbox-container img {
+        cursor: default;
+        width: 700px;
+    }
+}
+
+/***************  NAVIGATION (older posts / newer posts) ********************/
+
+div.navigation {
+    font-size: var(--font-size-header);
+    padding-bottom: 40px;
+    padding-top: 15px;
+}
+
+div.navigation a {
+    color: #999;
+    text-decoration: none;
+}
+
+div.navigation a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.nav-arrow-left,
+.nav-arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.nav-arrow-left {
+    border-right: 15px solid #999;
+    float: left;
+    margin-right: 10px;
+}
+
+.nav-arrow-right {
+    border-left: 15px solid #999;
+    float: right;
+    margin-left: 10px;
+}
+
+@media not (min-width: 907px) { /* NARROW */
+    .nav-arrow-left,
+    .nav-arrow-right {
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        margin-top: 7px;
+    }
+    .nav-arrow-left {
+        border-right: 18px solid #999; 
+    }    
+    .nav-arrow-right {
+        border-left: 18px solid #999;
+    }
+}
+
+.navHoverLeft {
+    border-right-color: #000;
+}
+
+.navHoverRight {
+    border-left-color: #000;
+}
+
+
+
+/****************** BUTTONS ********************/
+
+.navbutton {
+    background-image: linear-gradient(#f7f8fa, #e7e9ec);
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .6) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+    font-size: var(--font-size-button);
+    height: 29px;
+    margin-right: 9px;
+    padding: 3px 9px 0px 8px;
+    font-weight: normal;
+    line-height: 150%;
+    outline: 0;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+body.mac-os .navbutton {
+    padding-top: 4px;
+}
+
+@media not (min-width: 907px) {  /* NARROW */
+    .navbutton {
+        height: 49px; 
+        margin-right: 20px;
+        padding: 3px 13px 0px; 
+    }
+}
+
+.navbutton:hover {
+    color: #0f1111;
+    text-decoration: underline;
+    /* border-color: #a2a6ac #979aa1 #82858a; */
+    /* background-image: linear-gradient(#f7f8fa, #cccccc); */
+}
+.navbutton:focus {
+    color: #0f1111;
+    border-color: #000000;
+    box-shadow: rgba(144, 144, 144, 0.5) 0 0 3px 2px;
+    outline: 0;
+}
+
+.navbutton.current {
+    color: #0f1111;
+    text-decoration: underline;
+}
+.navbutton.current:hover {
+    color: #0f1111;
+    text-decoration: underline;
+}
+.navbutton.current:focus {
+    color: #0f1111;
+    border-color: #000000;
+    box-shadow: rgba(144, 144, 144, 0.5) 0 0 3px 2px;
+    outline: 0;
+}

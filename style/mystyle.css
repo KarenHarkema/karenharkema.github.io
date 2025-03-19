@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+.content {
+    padding: 2em;
+}
+.artwork {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.artwork img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
